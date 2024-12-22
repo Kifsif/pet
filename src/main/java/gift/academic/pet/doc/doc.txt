@@ -1,0 +1,5 @@
+Ubuntu 17.2
+
+CREATE USER a_user WITH PASSWORD 'password';
+create database pet;
+GRANT ALL PRIVILEGES ON DATABASE pet to a_user;
