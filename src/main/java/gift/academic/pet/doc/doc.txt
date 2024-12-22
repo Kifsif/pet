@@ -3,3 +3,10 @@ Ubuntu 17.2
 CREATE USER a_user WITH PASSWORD 'password';
 create database pet;
 GRANT ALL PRIVILEGES ON DATABASE pet to a_user;
+\c pet
+GRANT ALL ON SCHEMA public TO pet_admin;
+
+
+spring.datasource.url=jdbc:postgresql://localhost:5432/pet
+spring.datasource.username=pet_admin
+spring.datasource.password=F~m+S1gYs%?0(&zqW8(z

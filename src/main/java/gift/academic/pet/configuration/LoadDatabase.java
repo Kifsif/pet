@@ -1,0 +1,24 @@
+package gift.academic.pet.configuration;
+
+import gift.academic.pet.models.User;
+import gift.academic.pet.repositories.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+class LoadDatabase {
+
+    private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
+
+    @Bean
+    CommandLineRunner initDatabase(UserRepository repository) {
+
+        return args -> {
+            log.info("Preloading " + repository.save(new User("Фома", 79910221276L, "m@mal.ru")));
+            log.info("Preloading " + repository.save(new User("Фома1", 79910221276L, "m1@mal.ru")));
+        };
+    }
+}

@@ -1,21 +1,49 @@
 package gift.academic.pet.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
+@Table(name = "user_account")
 public class User {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
+
     private Long phone;
     private String email;
     private String name;
-    private String registrationDate;
+
+    @Column(nullable = false, updatable = false)
+    @CreationTimestamp
+    private LocalDateTime registrationDate;
     private int ordersCount;
     private int petsCount;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    private String token;
+
+    public User() {
+    }
+
+    public User(String name, Long phone, String email) {
+        this.phone = phone;
+        this.email = email;
+        this.name = name;
+        this.token = UUID.randomUUID().toString();
+    }
 
     @Override
     public String toString() {
@@ -57,11 +85,11 @@ public class User {
         this.name = name;
     }
 
-    public String getRegistrationDate() {
+    public LocalDateTime getRegistrationDate() {
         return registrationDate;
     }
 
-    public void setRegistrationDate(String registrationDate) {
+    public void setRegistrationDate(LocalDateTime registrationDate) {
         this.registrationDate = registrationDate;
     }
 
