@@ -10,3 +10,14 @@ GRANT ALL ON SCHEMA public TO pet_admin;
 spring.datasource.url=jdbc:postgresql://localhost:5432/pet
 spring.datasource.username=pet_admin
 spring.datasource.password=F~m+S1gYs%?0(&zqW8(z
+
+
+
+
+https://requestcatcher.com/
+https://hoppscotch.io/
+
+
+
+https://www.3dtronica.ru/prostaya-ustanovka-yii2-na-ubuntu-18-04/
+https://stackoverflow.com/questions/10144634/htaccess-invalid-command-rewriteengine-perhaps-misspelled-or-defined-by-a-m

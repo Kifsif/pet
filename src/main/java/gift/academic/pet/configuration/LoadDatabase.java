@@ -17,8 +17,19 @@ class LoadDatabase {
     CommandLineRunner initDatabase(UserRepository repository) {
 
         return args -> {
-            log.info("Preloading " + repository.save(new User("Фома", 79910221276L, "m@mal.ru")));
-            log.info("Preloading " + repository.save(new User("Фома1", 79910221276L, "m1@mal.ru")));
+            log.info("Preloading " + repository.save(new User("+75894589332",
+                    "borzoy@mal.ru",
+                    "Борзомысл",
+                    "password",
+                    true,
+                    "fc4de241-3041-4bb5-89a2-6da6b1a15e21")));
+            log.info("Preloading " + repository.save(new User(
+                    "+75681234565",
+                    "grandmother@mal.ru",
+                    "Бабушка Европы",
+                    "password",
+                    true,
+                    "78dc1018-9d3b-4cc7-9525-1dcd130041a4")));
         };
     }
 }

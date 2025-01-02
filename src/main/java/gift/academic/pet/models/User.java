@@ -1,71 +1,97 @@
 package gift.academic.pet.models;
 
+import gift.academic.pet.dtos.UserRegistrationDto;
+import gift.academic.pet.services.sanitizers.PhoneSanitizer;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.NoArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.CreatedDate;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
 @Table(name = "user_account")
 public class User {
+
+
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Integer id;
 
-    private Long phone;
-    private String email;
-    private String name;
+    @NotNull
+    String phone;
 
-    @Column(nullable = false, updatable = false)
+    @NotNull
+    String email;
+
+    @NotNull
+    String name;
+
+    @NotNull
+    String password;
+
+    @NotNull
+    Boolean confirm;
+
     @CreationTimestamp
-    private LocalDateTime registrationDate;
-    private int ordersCount;
-    private int petsCount;
+    private Instant registrationDate;
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    private String token;
+    String token;
 
     public User() {
     }
 
-    public User(String name, Long phone, String email) {
+    public User(String phone,
+                String email,
+                String name,
+                String password,
+                Boolean confirm
+    ) {
         this.phone = phone;
         this.email = email;
         this.name = name;
-        this.token = UUID.randomUUID().toString();
+        this.password = password;
+        this.confirm = confirm;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+
+    // Только для целей отладки.
+    public User(String phone,
+                String email,
+                String name,
+                String password,
+                Boolean confirm,
+                String token) {
+        this(phone, email, name, password, confirm);
+        this.token = token;
     }
 
-    public Long getId() {
+    public User(UserRegistrationDto userRegistrationDto) {
+        this(userRegistrationDto.getPhone(),
+                userRegistrationDto.getEmail(),
+                userRegistrationDto.getName(),
+                userRegistrationDto.getPassword(),
+                Boolean.valueOf(userRegistrationDto.getConfirm()));
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Instant getRegistrationDate() {
+        return registrationDate;
     }
 
-    public Long getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Long phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -85,27 +111,19 @@ public class User {
         this.name = name;
     }
 
-    public LocalDateTime getRegistrationDate() {
-        return registrationDate;
+    public String getToken() {
+        return token;
     }
 
-    public void setRegistrationDate(LocalDateTime registrationDate) {
-        this.registrationDate = registrationDate;
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public int getOrdersCount() {
-        return ordersCount;
-    }
-
-    public void setOrdersCount(int ordersCount) {
-        this.ordersCount = ordersCount;
+        return 1;
     }
 
     public int getPetsCount() {
-        return petsCount;
-    }
-
-    public void setPetsCount(int petsCount) {
-        this.petsCount = petsCount;
+        return 1;
     }
 }

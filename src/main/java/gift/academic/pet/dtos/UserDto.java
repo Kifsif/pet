@@ -4,7 +4,7 @@ import gift.academic.pet.models.User;
 
 public class UserDto {
 
-    private Long id;
+    private Integer id;
     private String phone;
     private String email;
     private String name;
@@ -22,11 +22,11 @@ public class UserDto {
         petsCount = user.getPetsCount();
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

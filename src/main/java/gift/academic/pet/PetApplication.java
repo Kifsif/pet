@@ -3,7 +3,8 @@ package gift.academic.pet;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+
+@SpringBootApplication()
 public class PetApplication {
 
 	public static void main(String[] args) {
