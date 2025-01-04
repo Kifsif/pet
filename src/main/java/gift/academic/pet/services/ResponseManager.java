@@ -45,4 +45,14 @@ public class ResponseManager {
         return response;
     }
 
+    public Map<String, Map<String, String>> getOkStatus(){
+        Map<String, String> status = new HashMap<>();
+        status.put("status", "ok");
+
+        Map<String, Map<String, String>> response = new HashMap<>();
+        response.put("data", status);
+
+        return response;
+    }
+
 }

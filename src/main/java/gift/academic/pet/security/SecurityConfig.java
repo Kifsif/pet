@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 //import org.springframework.security.web.SecurityConfigurerAdapter;
 
 @Configuration
@@ -35,14 +36,16 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    protected void configure(HttpSecurity http) throws Exception {
+    @Bean
+    protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/login", "/login/", "/register", "/register/").permitAll()  // Public pages
-                                .anyRequest().authenticated()  // Requires authentication for other pages
+                                //.requestMatchers("/login", "/login/", "/register", "/register/").permitAll()  // Public pages
+                                .anyRequest().permitAll()
                 );
 
         http.csrf(AbstractHttpConfigurer::disable);
+        return http.build();
     }
 }

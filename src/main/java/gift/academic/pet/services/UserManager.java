@@ -12,6 +12,6 @@ public class UserManager {
     }
 
     public String selectOrGenerateToken(){
-
+        return "ddd";
     }
 }

@@ -2,6 +2,7 @@ package gift.academic.pet.controllers;
 
 
 import gift.academic.pet.dtos.LoginDto;
+import gift.academic.pet.dtos.PhoneDto;
 import gift.academic.pet.dtos.UserDto;
 
 import gift.academic.pet.dtos.UserRegistrationDto;
@@ -18,10 +19,7 @@ import org.springframework.http.MediaType;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @RestController
@@ -52,11 +50,21 @@ public class UserController {
     }
 
     @PatchMapping({"/users/{id}/phone", "/users/{id}/phone/"})
-    public User updatePhone(@PathVariable Integer id) {
+    public Map<String, Map<String, String>> updatePhone(@Valid @RequestBody PhoneDto phoneDto,
+                                                        @RequestParam Integer id,
+                                                        BindingResult bindingResult) throws UserNotFoundException, UserRegistrationValidationException {
         // Изменение номера телефона
 
+        if (bindingResult.hasErrors()) {
+            throw new UserRegistrationValidationException(bindingResult);
+        }
 
-        return null;
+
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException());
+        user.setPhone(phoneDto.getPhone());
+        userRepository.save(user);
+
+        return responseManager.getOkStatus();
     }
 
 
