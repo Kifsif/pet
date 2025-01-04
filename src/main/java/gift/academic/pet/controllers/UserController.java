@@ -51,14 +51,14 @@ public class UserController {
 
     @PatchMapping({"/users/{id}/phone", "/users/{id}/phone/"})
     public Map<String, Map<String, String>> updatePhone(@Valid @RequestBody PhoneDto phoneDto,
-                                                        @RequestParam Integer id,
-                                                        BindingResult bindingResult) throws UserNotFoundException, UserRegistrationValidationException {
+                                                        @PathVariable Integer id,
+                                                        BindingResult bindingResult) throws UserNotFoundException,
+                                                            UserRegistrationValidationException {
         // Изменение номера телефона
 
         if (bindingResult.hasErrors()) {
             throw new UserRegistrationValidationException(bindingResult);
         }
-
 
         User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException());
         user.setPhone(phoneDto.getPhone());
