@@ -126,4 +126,24 @@ public class User {
     public int getPetsCount() {
         return 1;
     }
+
+    public @NotNull String getPassword() {
+        return password;
+    }
+
+    public void setPassword(@NotNull String password) {
+        this.password = password;
+    }
+
+    public @NotNull Boolean getConfirm() {
+        return confirm;
+    }
+
+    public void setConfirm(@NotNull Boolean confirm) {
+        this.confirm = confirm;
+    }
+
+    public void setRegistrationDate(Instant registrationDate) {
+        this.registrationDate = registrationDate;
+    }
 }

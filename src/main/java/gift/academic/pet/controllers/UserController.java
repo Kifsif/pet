@@ -1,6 +1,7 @@
 package gift.academic.pet.controllers;
 
 
+import gift.academic.pet.dtos.LoginDto;
 import gift.academic.pet.dtos.UserDto;
 
 import gift.academic.pet.dtos.UserRegistrationDto;
@@ -61,7 +62,7 @@ public class UserController {
 
     @PostMapping({"/register", "/register"})
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void registerUsre(@Valid @RequestBody UserRegistrationDto userRegistrationDto,
+    public void registerUser(@Valid @RequestBody UserRegistrationDto userRegistrationDto,
              BindingResult bindingResult) throws UserRegistrationValidationException {
 
         // Запрос для регистрации нового пользователя в системе.
@@ -73,5 +74,14 @@ public class UserController {
 
         User user = new User(userRegistrationDto);
         userRepository.save(user);
+    }
+
+    @PostMapping({"/login", "/login/"})
+    public Map<String, Map<String, String>> login(@Valid @RequestBody LoginDto loginDto){
+
+
+
+        Map<String, Map<String, String>> result = responseManager.getLoginResponse();
+        return result;
     }
 }

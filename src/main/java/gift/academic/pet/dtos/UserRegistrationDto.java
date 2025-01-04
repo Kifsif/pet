@@ -16,7 +16,7 @@ public class UserRegistrationDto {
 
     @NotNull
     @NotBlank
-    @Email
+    @Email(message="Email format is wrong.")
     String email;
 
     @NotNull

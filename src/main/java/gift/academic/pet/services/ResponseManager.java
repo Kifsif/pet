@@ -34,4 +34,15 @@ public class ResponseManager {
 
         return response;
     }
+
+    public Map<String, Map<String, String>> getLoginResponse(){
+        Map<String, String> token = new HashMap<>();
+        token.put("token", "tokenBody");
+
+        Map<String, Map<String, String>> response = new HashMap<>();
+        response.put("data", token);
+
+        return response;
+    }
+
 }
