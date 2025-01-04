@@ -4,7 +4,6 @@ package gift.academic.pet.controllers;
 import gift.academic.pet.dtos.EmailDto;
 import gift.academic.pet.dtos.LoginDto;
 import gift.academic.pet.dtos.PhoneDto;
-import gift.academic.pet.dtos.UserDto;
 import gift.academic.pet.exceptions.UserNotFoundException;
 import gift.academic.pet.exceptions.ValidationException;
 import gift.academic.pet.models.User;
@@ -40,7 +39,7 @@ public class UserController {
 
 
     @GetMapping({"/users/{id}", "/users/{id}/"})
-    public Map<String, Map<String, List<UserDto>>> getUser(@PathVariable Integer id) throws UserNotFoundException {
+    public Map<String, Map<String, List<User>>> getUser(@PathVariable Integer id) throws UserNotFoundException {
         // Информация о пользователе
 
         var response = responseManager.getUserResponse(id);

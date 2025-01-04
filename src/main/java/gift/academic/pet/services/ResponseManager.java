@@ -1,6 +1,5 @@
 package gift.academic.pet.services;
 
-import gift.academic.pet.dtos.UserDto;
 import gift.academic.pet.exceptions.UserNotFoundException;
 import gift.academic.pet.models.User;
 import gift.academic.pet.repositories.UserRepository;
@@ -20,16 +19,16 @@ public class ResponseManager {
         this.userRepository = userRepository;
     }
 
-    public Map<String, Map<String, List<UserDto>>> getUserResponse(int id) throws UserNotFoundException {
+    public Map<String, Map<String, List<User>>> getUserResponse(int id) throws UserNotFoundException {
         User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException());
 
-        List<UserDto> userList = new ArrayList();
-        userList.add(new UserDto(user));
+        List<User> userList = new ArrayList();
+        userList.add(user);
 
-        Map<String, List<UserDto>> userMap = new HashMap<>();
+        Map<String, List<User>> userMap = new HashMap<>();
         userMap.put("user", userList);
 
-        Map<String, Map<String, List<UserDto>>> response = new HashMap<>();
+        Map<String, Map<String, List<User>>> response = new HashMap<>();
         response.put("data", userMap);
 
         return response;
