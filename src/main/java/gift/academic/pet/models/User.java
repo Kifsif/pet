@@ -16,6 +16,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "user_account")
+
 public class User {
 
 
@@ -24,9 +25,11 @@ public class User {
     Integer id;
 
     @NotNull
+    @Column(unique=true)
     String phone;
 
     @NotNull
+    @Column(unique=true)
     String email;
 
     @NotNull

@@ -1,13 +1,10 @@
 package gift.academic.pet.controllers;
 
 
-import gift.academic.pet.dtos.LoginDto;
-import gift.academic.pet.dtos.PhoneDto;
-import gift.academic.pet.dtos.UserDto;
+import gift.academic.pet.dtos.*;
 
-import gift.academic.pet.dtos.UserRegistrationDto;
 import gift.academic.pet.exceptions.UserNotFoundException;
-import gift.academic.pet.exceptions.UserRegistrationValidationException;
+import gift.academic.pet.exceptions.ValidationException;
 import gift.academic.pet.models.User;
 
 import gift.academic.pet.repositories.UserRepository;
@@ -51,13 +48,13 @@ public class UserController {
 
     @PatchMapping({"/users/{id}/phone", "/users/{id}/phone/"})
     public Map<String, Map<String, String>> updatePhone(@Valid @RequestBody PhoneDto phoneDto,
-                                                        @PathVariable Integer id,
-                                                        BindingResult bindingResult) throws UserNotFoundException,
-                                                            UserRegistrationValidationException {
+                                                        BindingResult bindingResult,
+                                                        @PathVariable Integer id) throws UserNotFoundException,
+            ValidationException {
         // Изменение номера телефона
 
         if (bindingResult.hasErrors()) {
-            throw new UserRegistrationValidationException(bindingResult);
+            throw new ValidationException(bindingResult);
         }
 
         User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException());
@@ -67,17 +64,35 @@ public class UserController {
         return responseManager.getOkStatus();
     }
 
+    @PatchMapping({"/users/{id}/email", "/users/{id}/email/"})
+    public Map<String, Map<String, String>> updateEmail(@Valid @RequestBody EmailDto emailDto,
+                                                        BindingResult bindingResult,
+                                                        @PathVariable Integer id) throws UserNotFoundException,
+            ValidationException {
+        // Изменение адреса электронной почты
+
+        if (bindingResult.hasErrors()) {
+            throw new ValidationException(bindingResult);
+        }
+
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException());
+        user.setEmail(emailDto.getEmail());
+        userRepository.save(user);
+
+        return responseManager.getOkStatus();
+    }
+
 
     @PostMapping({"/register", "/register"})
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void registerUser(@Valid @RequestBody UserRegistrationDto userRegistrationDto,
-             BindingResult bindingResult) throws UserRegistrationValidationException {
+             BindingResult bindingResult) throws ValidationException {
 
         // Запрос для регистрации нового пользователя в системе.
 
         if (bindingResult.hasErrors()) {
 
-            throw new UserRegistrationValidationException(bindingResult);
+            throw new ValidationException(bindingResult);
         }
 
         User user = new User(userRegistrationDto);

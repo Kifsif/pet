@@ -11,7 +11,7 @@ import java.lang.annotation.*;
 @Target( { ElementType.METHOD, ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PhoneConstraint {
-    String message() default "Only figures, may start with a plus sign.";
+    String message() default "Only figures are allowed. May start with a plus sign.";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
