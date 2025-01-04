@@ -1,7 +1,6 @@
 package gift.academic.pet.validation.validators;
 
 import gift.academic.pet.validation.constraints.PasswordConstraint;
-import gift.academic.pet.validation.constraints.PhoneConstraint;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 

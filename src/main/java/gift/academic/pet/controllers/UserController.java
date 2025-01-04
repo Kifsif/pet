@@ -1,12 +1,13 @@
 package gift.academic.pet.controllers;
 
 
-import gift.academic.pet.dtos.*;
-
+import gift.academic.pet.dtos.EmailDto;
+import gift.academic.pet.dtos.LoginDto;
+import gift.academic.pet.dtos.PhoneDto;
+import gift.academic.pet.dtos.UserDto;
 import gift.academic.pet.exceptions.UserNotFoundException;
 import gift.academic.pet.exceptions.ValidationException;
 import gift.academic.pet.models.User;
-
 import gift.academic.pet.repositories.UserRepository;
 import gift.academic.pet.services.ErrorResponseManager;
 import gift.academic.pet.services.ResponseManager;
@@ -16,7 +17,8 @@ import org.springframework.http.MediaType;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -85,7 +87,7 @@ public class UserController {
 
     @PostMapping({"/register", "/register"})
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void registerUser(@Valid @RequestBody UserRegistrationDto userRegistrationDto,
+    public void registerUser(@Valid @RequestBody User user,
              BindingResult bindingResult) throws ValidationException {
 
         // Запрос для регистрации нового пользователя в системе.
@@ -95,7 +97,6 @@ public class UserController {
             throw new ValidationException(bindingResult);
         }
 
-        User user = new User(userRegistrationDto);
         userRepository.save(user);
     }
 

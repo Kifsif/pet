@@ -1,29 +1,21 @@
 package gift.academic.pet.validation.validators;
 
-import gift.academic.pet.dtos.UserRegistrationDto;
+import gift.academic.pet.models.User;
 import gift.academic.pet.validation.constraints.PasswordMatchConstraint;
-import gift.academic.pet.validation.constraints.PhoneConstraint;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-import jakarta.validation.ConstraintViolationException;
-import jakarta.validation.ValidationException;
 
 
-import java.net.BindException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-
-public class PasswordMatchValidator implements ConstraintValidator<PasswordMatchConstraint, UserRegistrationDto> {
+public class PasswordMatchValidator implements ConstraintValidator<PasswordMatchConstraint, User> {
     @Override
     public void initialize(PasswordMatchConstraint constraint) {
     }
 
     @Override
-    public boolean isValid(UserRegistrationDto userRegistrationDto,
+    public boolean isValid(User user,
                            ConstraintValidatorContext cxt) {
 
-        Boolean result = userRegistrationDto.getPassword().equals(userRegistrationDto.getPasswordConfirmation());
+        Boolean result = user.getPassword().equals(user.getPasswordConfirmation());
 
         if (!result) {
             // Disable the default constraint violation.

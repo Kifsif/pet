@@ -1,50 +1,62 @@
 package gift.academic.pet.models;
 
-import gift.academic.pet.dtos.UserRegistrationDto;
-import gift.academic.pet.services.sanitizers.PhoneSanitizer;
+import gift.academic.pet.validation.constraints.*;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.NoArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.annotation.CreatedDate;
 
 import java.time.Instant;
-import java.time.LocalDateTime;
-import java.util.UUID;
+import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "user_account")
-
+@PasswordMatchConstraint
 public class User {
 
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Integer id;
+    private Integer id;
 
     @NotNull
+    @NotBlank
     @Column(unique=true)
-    String phone;
+    @PhoneConstraint
+    private String phone;
 
     @NotNull
+    @NotBlank
     @Column(unique=true)
-    String email;
+    @Email(message="Format is wrong.")
+    private String email;
 
     @NotNull
-    String name;
+    @NotBlank
+    @NameConstraint
+    private String name;
 
     @NotNull
-    String password;
+    @NotBlank
+    @PasswordConstraint
+    private String password;
 
     @NotNull
-    Boolean confirm;
+    @NotBlank
+    @Transient
+    private String password_confirmation;
+
+    @NotNull
+    //@NotBlank
+    @ConfirmConstraint
+    String confirm;
 
     @CreationTimestamp
-    private Instant registrationDate;
+    private LocalDate registrationDate;
 
-    String token;
+    private String token;
 
     public User() {
     }
@@ -53,12 +65,14 @@ public class User {
                 String email,
                 String name,
                 String password,
-                Boolean confirm
+                String password_confirmation,
+                String confirm
     ) {
         this.phone = phone;
         this.email = email;
         this.name = name;
         this.password = password;
+        this.password_confirmation=password_confirmation;
         this.confirm = confirm;
     }
 
@@ -68,25 +82,18 @@ public class User {
                 String email,
                 String name,
                 String password,
-                Boolean confirm,
+                String password_confirmation,
+                String confirm,
                 String token) {
-        this(phone, email, name, password, confirm);
+        this(phone, email, name, password, password_confirmation, confirm);
         this.token = token;
-    }
-
-    public User(UserRegistrationDto userRegistrationDto) {
-        this(userRegistrationDto.getPhone(),
-                userRegistrationDto.getEmail(),
-                userRegistrationDto.getName(),
-                userRegistrationDto.getPassword(),
-                Boolean.valueOf(userRegistrationDto.getConfirm()));
     }
 
     public Integer getId() {
         return id;
     }
 
-    public Instant getRegistrationDate() {
+    public LocalDate getRegistrationDate() {
         return registrationDate;
     }
 
@@ -138,15 +145,23 @@ public class User {
         this.password = password;
     }
 
-    public @NotNull Boolean getConfirm() {
+    public @NotNull String getConfirm() {
         return confirm;
     }
 
-    public void setConfirm(@NotNull Boolean confirm) {
+    public void setConfirm(@NotNull String confirm) {
         this.confirm = confirm;
     }
 
-    public void setRegistrationDate(Instant registrationDate) {
+    public void setRegistrationDate(LocalDate registrationDate) {
         this.registrationDate = registrationDate;
+    }
+
+    public String getPasswordConfirmation() {
+        return password_confirmation;
+    }
+
+    public void setPassword_confirmation(@NotNull @NotBlank String password_confirmation) {
+        this.password_confirmation = password_confirmation;
     }
 }

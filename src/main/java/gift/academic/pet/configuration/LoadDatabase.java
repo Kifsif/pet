@@ -20,15 +20,17 @@ class LoadDatabase {
             log.info("Preloading " + repository.save(new User("+75894589332",
                     "borzoy@mal.ru",
                     "Борзомысл",
-                    "password",
-                    true,
+                    "Password1",
+                    "Password1",
+                    "on",
                     "fc4de241-3041-4bb5-89a2-6da6b1a15e21")));
             log.info("Preloading " + repository.save(new User(
                     "+75681234565",
                     "grandmother@mal.ru",
                     "Бабушка Европы",
-                    "password",
-                    true,
+                    "Password1",
+                    "Password1",
+                    "on",
                     "78dc1018-9d3b-4cc7-9525-1dcd130041a4")));
         };
     }
