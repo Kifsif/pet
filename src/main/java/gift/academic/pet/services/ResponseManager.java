@@ -44,14 +44,20 @@ public class ResponseManager {
         return response;
     }
 
-    public Map<String, Map<String, String>> getOkStatus(){
-        Map<String, String> status = new HashMap<>();
+    public Map<String, Map<String, Object>> getOkStatus(){
+        Map<String, Object> status = new HashMap<>();
         status.put("status", "ok");
 
-        Map<String, Map<String, String>> response = new HashMap<>();
+        Map<String, Map<String, Object>> response = new HashMap<>();
         response.put("data", status);
 
         return response;
     }
 
+    public Map<String, Map<String, Object>> getOkWithIdStatus(int id){
+        Map<String, Map<String, Object>> response = getOkStatus();
+
+        response.get("data").put("id", id);
+        return response;
+    }
 }

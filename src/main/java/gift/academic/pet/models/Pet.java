@@ -1,9 +1,12 @@
 package gift.academic.pet.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import gift.academic.pet.validation.constraints.ConfirmConstraint;
+import gift.academic.pet.validation.constraints.PasswordConstraint;
+import gift.academic.pet.validation.constraints.PhoneConstraint;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Pet {
@@ -11,10 +14,54 @@ public class Pet {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    public Pet(Integer id) {
-        this.id = id;
-    }
+    @NotNull
+    @NotBlank
+    private String name;
 
-    public Pet() {
-    }
+    @NotNull
+    @NotBlank
+    @PhoneConstraint
+    private String phone;
+
+    @NotNull
+    @NotBlank
+    @Email
+    private String email;
+
+    @NotNull
+    @NotBlank
+    @Transient
+    @PasswordConstraint
+    private String password;
+
+    @NotNull
+    @NotBlank
+    @Transient
+    private String password_confirmation;
+
+    @NotNull
+    @NotBlank
+    @ConfirmConstraint
+    @Transient
+    private String confirm;
+
+    @NotNull
+    @NotBlank
+    private String kind;
+
+    @NotNull
+    @NotBlank
+    private String photo1;
+
+    private String photo2;
+
+    private String photo3;
+
+    @NotNull
+    @NotBlank
+    private String mark;
+
+    @NotNull
+    @NotBlank
+    private String description;
 }

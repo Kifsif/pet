@@ -40,12 +40,12 @@ public class User {
     @NotNull
     @NotBlank
     @PasswordConstraint
+    @Transient
     private String password;
 
     @NotNull
     @NotBlank
     @Transient
-    @JsonIgnore
     private String password_confirmation;
 
     @NotNull
@@ -121,6 +121,7 @@ public class User {
         this.name = name;
     }
 
+    @JsonIgnore
     public String getToken() {
         return token;
     }
@@ -137,6 +138,7 @@ public class User {
         return 1;
     }
 
+    @JsonIgnore
     public @NotNull String getPassword() {
         return password;
     }
@@ -145,6 +147,7 @@ public class User {
         this.password = password;
     }
 
+    @JsonIgnore
     public @NotNull String getConfirm() {
         return confirm;
     }
@@ -157,6 +160,7 @@ public class User {
         this.registrationDate = registrationDate;
     }
 
+    @JsonIgnore
     public String getPasswordConfirmation() {
         return password_confirmation;
     }

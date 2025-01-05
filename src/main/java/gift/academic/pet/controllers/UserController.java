@@ -48,7 +48,7 @@ public class UserController {
     }
 
     @PatchMapping({"/users/{id}/phone", "/users/{id}/phone/"})
-    public Map<String, Map<String, String>> updatePhone(@Valid @RequestBody PhoneDto phoneDto,
+    public Map<String, Map<String, Object>> updatePhone(@Valid @RequestBody PhoneDto phoneDto,
                                                         BindingResult bindingResult,
                                                         @PathVariable Integer id) throws UserNotFoundException,
             ValidationException {
@@ -66,7 +66,7 @@ public class UserController {
     }
 
     @PatchMapping({"/users/{id}/email", "/users/{id}/email/"})
-    public Map<String, Map<String, String>> updateEmail(@Valid @RequestBody EmailDto emailDto,
+    public Map<String, Map<String, Object>> updateEmail(@Valid @RequestBody EmailDto emailDto,
                                                         BindingResult bindingResult,
                                                         @PathVariable Integer id) throws UserNotFoundException,
             ValidationException {
