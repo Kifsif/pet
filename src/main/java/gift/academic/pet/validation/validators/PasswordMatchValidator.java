@@ -1,21 +1,21 @@
 package gift.academic.pet.validation.validators;
 
-import gift.academic.pet.models.User;
+import gift.academic.pet.interfaces.PasswordInterface;
 import gift.academic.pet.validation.constraints.PasswordMatchConstraint;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
 
-public class PasswordMatchValidator implements ConstraintValidator<PasswordMatchConstraint, User> {
+public class PasswordMatchValidator implements ConstraintValidator<PasswordMatchConstraint, PasswordInterface> {
     @Override
     public void initialize(PasswordMatchConstraint constraint) {
     }
 
     @Override
-    public boolean isValid(User user,
+    public boolean isValid(PasswordInterface passwordInterfaceInstance,
                            ConstraintValidatorContext cxt) {
 
-        Boolean result = user.getPassword().equals(user.getPasswordConfirmation());
+        Boolean result = passwordInterfaceInstance.getPassword().equals(passwordInterfaceInstance.getPassword_confirmation());
 
         if (!result) {
             // Disable the default constraint violation.

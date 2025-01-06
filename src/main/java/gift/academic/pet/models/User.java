@@ -1,6 +1,7 @@
 package gift.academic.pet.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import gift.academic.pet.interfaces.PasswordInterface;
 import gift.academic.pet.validation.constraints.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -13,7 +14,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "user_account")
 @PasswordMatchConstraint
-public class User {
+public class User implements PasswordInterface {
 
 
     @Id
@@ -161,7 +162,7 @@ public class User {
     }
 
     @JsonIgnore
-    public String getPasswordConfirmation() {
+    public String getPassword_confirmation() {
         return password_confirmation;
     }
 

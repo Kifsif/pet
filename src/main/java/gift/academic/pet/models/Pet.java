@@ -63,5 +63,6 @@ public class Pet {
 
     @NotNull
     @NotBlank
+    @Column(columnDefinition = "TEXT")
     private String description;
 }
